@@ -54,6 +54,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
         } catch (e) {
           _expression = 'Error';
         }
+      } else if (value == 'No more math!') {
+        _expression = 'No more math!';
       } else {
         if (_expression.contains('=')) {
           _expression = value;
@@ -69,7 +71,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gio & Copilot Calculator', style: TextStyle(color: Colors.white),),
+        title: const Text('GitHub Copilot Calculator'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Column(
@@ -80,7 +82,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               alignment: Alignment.centerRight,
               child: TextField(
                 controller: _controller,
-                style: const TextStyle(fontSize: 38),
+                style: const TextStyle(fontSize: 32),
                 textAlign: TextAlign.right,
                 readOnly: true,
                 decoration: const InputDecoration(border: InputBorder.none),
@@ -114,6 +116,21 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _onPressed('No more math!'),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('No more math!', style: TextStyle(fontSize: 24)),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -127,7 +144,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      child: Text(value, style: const TextStyle(fontSize: 30)),
+      child: Text(value, style: const TextStyle(fontSize: 24)),
     );
   }
 }
